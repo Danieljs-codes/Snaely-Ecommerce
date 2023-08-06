@@ -40,7 +40,6 @@ function useForm(initialState, validationRules, submitCallback) {
     return !hasErrors;
   }
 
-
   function debounce(func, delay) {
     let timeoutId;
 
@@ -140,12 +139,12 @@ export default useForm;
 //       </p>
 //       <div className="mt-10 flex flex-col gap-4">
 //         {/* ... Continue with Apple button ... */}
-//         <button
-//           onClick={handleSignUpWithGoogle}
-//           className="flex w-full items-center justify-center gap-x-2 rounded-full border border-primary-black-500 py-[14px] text-base font-medium"
-//         >
-//           {/* ... Continue with Google button ... */}
-//         </button>
+// <button
+//   onClick={handleSignUpWithGoogle}
+//   className="flex w-full items-center justify-center gap-x-2 rounded-full border border-primary-black-500 py-[14px] text-base font-medium"
+// >
+//   {/* ... Continue with Google button ... */}
+// </button>
 //         <div className="flex items-center">{/* ... Divider line ... */}</div>
 //       </div>
 //       <form onSubmit={handleSubmit}>

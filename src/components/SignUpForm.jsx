@@ -50,12 +50,17 @@ function SignUpForm() {
         Join to start shopping and stay up-to-date on the latest deals.
       </p>
       <div className="mt-10 flex flex-col gap-4">
-        {/* ... Continue with Apple button ... */}
-        <button
-          onClick={handleSignUpWithGoogle}
-          className="flex w-full items-center justify-center gap-x-2 rounded-full border border-primary-black-500 py-[14px] text-base font-medium"
-        >
-          {/* ... Continue with Google button ... */}
+        <button className="flex w-full items-center justify-center gap-x-2 rounded-full border border-primary-black-500 py-[14px] text-base font-medium">
+          <IconContext.Provider value={{ size: '24px' }}>
+            <FaApple />
+          </IconContext.Provider>
+          Continue with Apple
+        </button>
+        <button className="flex w-full items-center justify-center gap-x-2 rounded-full border border-primary-black-500 py-[14px] text-base font-medium">
+          <IconContext.Provider value={{ size: '24px' }}>
+            <FaGoogle />
+          </IconContext.Provider>
+          Continue with Google
         </button>
         <div className="flex items-center">{/* ... Divider line ... */}</div>
       </div>

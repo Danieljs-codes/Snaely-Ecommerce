@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/UserContext';
 import { useEffect } from 'react';
+
+function useUser() {
+  return true;
+}
 
 function ProtectedRoute({ children }) {
   const user = useUser();
@@ -12,7 +15,7 @@ function ProtectedRoute({ children }) {
         navigate('/sign-up');
       }
     },
-    [user]
+    [user, navigate]
   );
 
   return children;

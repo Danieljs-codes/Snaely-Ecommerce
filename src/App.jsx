@@ -9,7 +9,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import SignUp from './pages/SignUp';
-import { UserProvider } from './context/UserContext';
+// import { UserProvider } from './context/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const queryClient = new QueryClient({
@@ -22,32 +22,32 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <UserProvider>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+    // <UserProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
 
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Home />} />
-              <Route path="product" element={<Products />} />
-              <Route path="product/:id" element={<Product />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="checkout" element={<Checkout />} />
-            </Route>
-            <Route path="*" element={<h1>404</h1>} />
-            <Route path="sign-up" element={<SignUp />} />
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Home />} />
+            <Route path="product" element={<Products />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
+          </Route>
+          <Route path="*" element={<h1>404</h1>} />
+          <Route path="sign-up" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+    // </UserProvider>
   );
 }
 

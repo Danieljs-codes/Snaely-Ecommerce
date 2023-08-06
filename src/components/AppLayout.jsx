@@ -1,8 +1,13 @@
 import { Outlet } from 'react-router-dom';
+
 import Navbar from './Navbar';
 import Banner from './Banner';
 
+
 function AppLayout() {
+
+
+
   return (
     <main>
       <Banner />

@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout';
 import SignUp from './pages/SignUp';
 // import { UserProvider } from './context/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,6 +46,8 @@ function App() {
           <Route path="*" element={<h1>404</h1>} />
           <Route path="sign-up" element={<SignUp />} />
         </Routes>
+
+        <Toaster position="top-right" />
       </BrowserRouter>
     </QueryClientProvider>
     // </UserProvider>

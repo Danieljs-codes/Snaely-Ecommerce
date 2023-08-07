@@ -1,14 +1,14 @@
-import React from 'react';
 import { FaApple, FaGoogle } from 'react-icons/fa6';
 import { IconContext } from 'react-icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
+import { useMutation } from '@tanstack/react-query';
+import { signUpWithEmailAndPassword } from '../services/apiAuth';
 
 import Logo from './Logo';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
-import { useForm } from '../hooks/useForm';
-import { useMutation } from '@tanstack/react-query';
-import { signUpWithEmailAndPassword } from '../services/apiAuth';
+import Toast from './Toast';
 
 function SignUpForm() {
   // Define validation rules for each field
@@ -29,8 +29,12 @@ function SignUpForm() {
   const { isLoading, mutate: signUp } = useMutation({
     mutationFn: signUpWithEmailAndPassword,
     onSuccess: data => {
+      Toast('success', 'Account created successfully, Redirecting...');
       console.log(data);
       navigate('/');
+    },
+    onError: error => {
+      Toast('error', 'Error Creating account, Please try again');
     },
   });
 
@@ -91,6 +95,7 @@ function SignUpForm() {
                 type="text"
                 placeholder="First Name"
                 className={errors.firstName && 'border-red-500'}
+                disabled={isLoading}
               >
                 {errors.firstName && (
                   <ErrorMessage message={errors.firstName} />
@@ -108,6 +113,7 @@ function SignUpForm() {
                 type="text"
                 placeholder="Last Name"
                 className={errors.lastName && 'border-red-500'}
+                disabled={isLoading}
               >
                 {errors.lastName && <ErrorMessage message={errors.lastName} />}
               </Input>
@@ -122,9 +128,10 @@ function SignUpForm() {
               onChange={e => handleChange('email', e.target.value)}
               id="email"
               type="email"
-              autoComplete="off"
+              // autoComplete="off"
               placeholder="Enter Email Address"
               className={errors.email && 'border-red-500'}
+              disabled={isLoading}
             >
               {errors.email && <ErrorMessage message={errors.email} />}
             </Input>
@@ -142,6 +149,7 @@ function SignUpForm() {
               className={errors.password && 'border-red-500'}
             >
               {errors.password && <ErrorMessage message={errors.password} />}
+              disabled={isLoading}
             </Input>
           </div>
         </div>
@@ -149,6 +157,7 @@ function SignUpForm() {
           onClick={handleSubmit}
           className="mt-10 block w-full rounded-full bg-primary-black-500 py-4 text-center text-base font-medium text-white"
           type="submit"
+          disabled={isLoading}
         >
           Create Account
         </button>

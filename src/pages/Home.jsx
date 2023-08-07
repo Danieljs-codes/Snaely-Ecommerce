@@ -1,14 +1,14 @@
-function Home() {
-  // if (!user) {
-  //   return <h1>Not Logged In</h1>;
-  // }
+import { useUser } from '../hooks/useUser';
 
-  // console.log(user);
+function Home() {
+  const { user } = useUser();
 
   return (
     <div className="py-8">
-      {/* <h2>{user}</h2> */}
-      {/* <h3>{user.uid}</h3> */}
+      <h2>
+        {user.user_metadata.firstName} {user.user_metadata.lastName}
+      </h2>
+      <h3>{user.id}</h3>
       <button>Sign Out</button>
     </div>
   );

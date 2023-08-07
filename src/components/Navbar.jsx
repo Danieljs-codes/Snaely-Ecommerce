@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { menuSlide, slide } from './NavbarAnim';
 
 import Logo from './Logo';
+import Dropdown from './Dropdown';
+import Modal from './Modal';
 
 function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -51,9 +53,13 @@ function Navbar() {
             <Link to="/cart">
               <LuShoppingCart />
             </Link>
-            <button className="hidden md:block">
-              <LuUser />
-            </button>
+            <div className="hidden cursor-pointer md:block">
+              <Dropdown />
+              <Modal
+                title="Delete Account"
+                description="Are you sure you want to delete your account? All of your data will be permanently removed. This action cannot be undone."
+              />
+            </div>
           </IconContext.Provider>
         </div>
         <AnimatePresence mode="wait">

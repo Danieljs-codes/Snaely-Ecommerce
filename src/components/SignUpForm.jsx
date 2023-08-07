@@ -147,9 +147,9 @@ function SignUpForm() {
               type="password"
               placeholder="Enter your desired password"
               className={errors.password && 'border-red-500'}
+              disabled={isLoading}
             >
               {errors.password && <ErrorMessage message={errors.password} />}
-              disabled={isLoading}
             </Input>
           </div>
         </div>

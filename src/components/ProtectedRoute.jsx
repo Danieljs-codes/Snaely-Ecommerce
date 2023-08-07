@@ -1,24 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useUser } from '../hooks/useUser';
 
-function useUser() {
-  return true;
-}
+import Spinner from './Spinner';
 
 function ProtectedRoute({ children }) {
-  const user = useUser();
+  const { isAuthenticated, isLoading } = useUser();
   const navigate = useNavigate();
 
   useEffect(
     function () {
-      if (!user) {
+      if (!isAuthenticated && !isLoading) {
         navigate('/sign-up');
       }
     },
-    [user, navigate]
+    [isAuthenticated, isLoading, navigate]
   );
 
-  return children;
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isAuthenticated) {
+    return children;
+  }
 }
 
 export default ProtectedRoute;

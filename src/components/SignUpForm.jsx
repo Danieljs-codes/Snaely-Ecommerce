@@ -1,15 +1,20 @@
 import React from 'react';
 import { FaApple, FaGoogle } from 'react-icons/fa6';
 import { IconContext } from 'react-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from './Logo';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
-import useForm from '../hooks/useForm'; // Import the custom hook
+import { useForm } from '../hooks/useForm';
+import { useMutation } from '@tanstack/react-query';
+import { signUpWithEmailAndPassword } from '../services/apiAuth';
 
 function SignUpForm() {
   // Define validation rules for each field
+
+  const navigate = useNavigate();
+
   const validationRules = {
     email: value =>
       !/\S+@\S+\.\S+/.test(value) ? 'Please enter a valid email address' : null,
@@ -21,9 +26,17 @@ function SignUpForm() {
       value.length < 3 ? 'Last name must be at least 3 characters' : null,
   };
 
+  const { isLoading, mutate: signUp } = useMutation({
+    mutationFn: signUpWithEmailAndPassword,
+    onSuccess: data => {
+      console.log(data);
+      navigate('/');
+    },
+  });
+
   // Define the submit callback function
   function submitCallback(formValues) {
-    // signUp({ email, password, firstName, lastName });
+    signUp(formValues);
   }
 
   // Use the useForm custom hook

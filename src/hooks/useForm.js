@@ -70,11 +70,12 @@ export function useForm(initialState, validationRules, submitCallback) {
 
     // Validate the entire form and submit if no errors
     if (validateForm()) {
-      // Reset all form fields and errors
-      // Call the provided submit callback with form values
       submitCallback(values);
-      setValues(initialState);
-      setErrors({});
+      // Hack Around Not clearing the form immediately after submit waiting 3 seconds (Guessing the redirect should have happen by then)
+      setTimeout(() => {
+        setValues(initialState);
+        setErrors({});
+      }, 3000);
     }
   }
 

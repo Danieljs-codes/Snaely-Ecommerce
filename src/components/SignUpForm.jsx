@@ -5,7 +5,6 @@ import { useForm } from '../hooks/useForm';
 import { useMutation } from '@tanstack/react-query';
 import { signUpWithEmailAndPassword } from '../services/apiAuth';
 
-import Logo from './Logo';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
 import Toast from './Toast';
@@ -30,7 +29,6 @@ function SignUpForm() {
     mutationFn: signUpWithEmailAndPassword,
     onSuccess: data => {
       Toast('success', 'Account created successfully, Redirecting...');
-      console.log(data);
       navigate('/');
     },
     onError: error => {

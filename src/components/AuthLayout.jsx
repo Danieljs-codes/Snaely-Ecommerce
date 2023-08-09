@@ -6,7 +6,6 @@ function AuthLayout() {
   const location = useLocation();
 
   const pathName = location.pathname.split('/')[1];
-  console.log(pathName);
 
   return (
     <main className="h-screen px-5">

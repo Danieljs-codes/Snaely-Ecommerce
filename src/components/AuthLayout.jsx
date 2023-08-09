@@ -19,7 +19,9 @@ function AuthLayout() {
               : 'Log in into your Account'}
           </h1>
           <p className="mt-3 max-w-[17rem] text-sm text-[#8E8F94]">
-            Join to start shopping and stay up-to-date on the latest deals.
+            {pathName === 'sign-up'
+              ? 'Join to start shopping and stay up-to-date on the latest deals.'
+              : 'Log in to your account to shopping the newest fashion style'}
           </p>
           <Outlet />
         </div>

@@ -41,6 +41,7 @@ export async function signOut() {
 
 export async function deleteAccount() {
   const { error } = await supabase.rpc('delete_user');
+  signOut();
 
   if (error) throw new Error(error.message || 'Error deleting account');
 }

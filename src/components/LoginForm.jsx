@@ -27,7 +27,7 @@ function LoginForm() {
     mutationFn: signInWithEmailAndPassword,
     onSuccess: data => {
       Toast('success', 'Logged In Successfully 🎉');
-      console.log(data);
+
       navigate('/');
     },
     onError: error => {

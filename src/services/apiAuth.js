@@ -40,20 +40,9 @@ export async function signOut() {
 }
 
 export async function deleteAccount() {
-  // setLoading(true);
-  // if (!user) throw new Error('No user');
-  await supabase.functions.invoke('deleteUser');
-  await supabase.auth.signOut();
-  // alert('Account deleted successfully!');
+  const { error } = await supabase.rpc('delete_user');
 
-  // alert('Error deleting the account!');
-  // console.log(error);
-
-  // setLoading(false);
-  // setIsModalOpen(false);
-  // Note that you also will force a logout after completing it
-  // await supabase.auth.signOut();
-  // router.push('/');
+  if (error) throw new Error(error.message || 'Error deleting account');
 }
 // Then, updating the deleteAccount function to use the new function: */
 
@@ -63,6 +52,8 @@ export async function signInWithEmailAndPassword({ email, password }) {
     password: password,
   });
   if (error)
-    throw new Error('Error Signing in try again with your email and password');
+    throw new Error(
+      error.message || 'Error signing in with email and password'
+    );
   return data;
 }

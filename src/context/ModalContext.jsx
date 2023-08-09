@@ -1,17 +1,17 @@
 // ModalContext.js
 import { createContext, useContext, useState } from 'react';
-import { useSignOut } from '../hooks/useSignOut';
+import { useDeleteUser } from '../hooks/useDeleteUser';
 
 const ModalContext = createContext();
 
 function ModalProvider({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { logout, isLoading } = useSignOut();
+  const { deleteUser, isLoading } = useDeleteUser();
 
   return (
     <ModalContext.Provider
-      value={{ isModalOpen, setIsModalOpen, logout, isLoading }}
+      value={{ isModalOpen, setIsModalOpen, deleteUser, isLoading }}
     >
       {children}
     </ModalContext.Provider>

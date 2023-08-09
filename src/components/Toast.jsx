@@ -2,6 +2,10 @@ import { toast } from 'react-hot-toast';
 import { HiXMark, HiCheckCircle } from 'react-icons/hi2';
 
 function Toast(type, message) {
+
+  // Implement the code for applying Tailwind Styles with Object Lookup it should have info, success and error
+  
+
   toast.custom(
     t => (
       <div

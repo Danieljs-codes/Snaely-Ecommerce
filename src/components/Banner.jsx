@@ -1,6 +1,6 @@
 function Banner() {
   return (
-    <div className="bg-primary-black-500  py-3 text-center text-[0.625rem] text-grey-50 md:text-xs lg:text-base">
+    <div className="bg-primary-black-500  px-4 py-3 text-center text-[0.625rem] text-grey-50 md:text-xs lg:text-base">
       <span className="underline underline-offset-4">
         Free shipping on orders over
       </span>

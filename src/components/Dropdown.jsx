@@ -3,7 +3,6 @@ import { Menu, Transition } from '@headlessui/react';
 import { LuUser } from 'react-icons/lu';
 import { IconContext } from 'react-icons';
 import { useSignOut } from '../hooks/useSignOut';
-
 import { useModal } from '../context/ModalContext';
 
 function classNames(...classes) {
@@ -12,7 +11,7 @@ function classNames(...classes) {
 
 function Dropdown() {
   const { setIsModalOpen } = useModal();
-
+  const { logout } = useSignOut();
   return (
     <Menu as="li" className="relative inline-block text-left">
       <div>
@@ -46,9 +45,23 @@ function Dropdown() {
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block w-full px-4 py-2 text-left text-sm'
                   )}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={logout}
                 >
                   Sign Out
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item as="div">
+              {({ active }) => (
+                <button
+                  type="button"
+                  className={classNames(
+                    active ? 'bg-red-400' : 'bg-red-500',
+                    'block w-full px-4 py-2 text-left text-sm text-white'
+                  )}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Delete Account
                 </button>
               )}
             </Menu.Item>

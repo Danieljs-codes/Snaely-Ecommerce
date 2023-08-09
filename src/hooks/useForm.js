@@ -71,10 +71,10 @@ export function useForm(initialState, validationRules, submitCallback) {
     // Validate the entire form and submit if no errors
     if (validateForm()) {
       // Reset all form fields and errors
-      setValues(initialState);
-      setErrors({});
       // Call the provided submit callback with form values
       submitCallback(values);
+      setValues(initialState);
+      setErrors({});
     }
   }
 

@@ -8,12 +8,12 @@ function HeroDesktop() {
       />
       <p className="sr-only">Create Your Own Style</p>
       <div className="flex items-center gap-x-6">
-        <p className="w-1/4 text-sm leading-loose">
+        <p className="md:w-1/4 lg:w-[18.9375rem] flex-1 text-sm leading-loose">
           Be yourself with our collection. We allow you to create a wardrobe
           that's all about you, no matter your personal style.
         </p>
         <img
-          className="mb-6 w-full"
+          className="mb-6 md:w-2/4 lg:w-3/4 flex-1"
           src="hero-subText.svg"
           alt="With Our Collection"
         />

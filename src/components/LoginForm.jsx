@@ -31,7 +31,7 @@ function LoginForm() {
       navigate('/');
     },
     onError: error => {
-      Toast('error', 'Error Creating account, Please try again');
+      Toast('error', error.message || 'Error Logging In 😢');
     },
   });
 

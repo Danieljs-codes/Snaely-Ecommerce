@@ -3,6 +3,7 @@ import { ModalProvider } from '../context/ModalContext';
 
 import Navbar from './Navbar';
 import Banner from './Banner';
+import Footer from './Footer';
 
 function AppLayout() {
   return (
@@ -14,6 +15,7 @@ function AppLayout() {
       <div className="px-4">
         <Outlet />
       </div>
+      <Footer />
     </main>
   );
 }

@@ -1,16 +1,38 @@
-import { useUser } from '../hooks/useUser';
+import HeroDesktop from '../components/HeroDesktop';
+import HeroMobile from '../components/HeroMobile';
+import Swiper from '../components/Swiper';
 
 function Home() {
-  const { user } = useUser();
-
   return (
-    <div className="py-8">
-      <h2>
-        {user.user_metadata.firstName} {user.user_metadata.lastName}
-      </h2>
-      <h3>{user.id}</h3>
-      <button>Sign Out</button>
-    </div>
+    <>
+      <div className="pt-12 text-primary-black-500">
+        <div>
+          <HeroMobile />
+          <HeroDesktop />
+        </div>
+        <div className="py-8 lg:py-14">
+          <Swiper
+            slides={[
+              {
+                img: 'swiper-1.png',
+                hashtag: '#outfitoftheday',
+                title: 'Bunch Beach party collections',
+              },
+              {
+                img: 'swiper-2.png',
+                hashtag: '#femininestyle',
+                title: 'Sunny day Outfit',
+              },
+              {
+                img: 'swiper-3.png',
+                hashtag: '#latestrelease',
+                title: 'Beauty at its Peak',
+              },
+            ]}
+          />
+        </div>
+      </div>
+    </>
   );
 }
 

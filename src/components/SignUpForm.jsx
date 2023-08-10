@@ -28,8 +28,8 @@ function SignUpForm() {
   const { isLoading, mutate: signUp } = useMutation({
     mutationFn: signUpWithEmailAndPassword,
     onSuccess: data => {
-      Toast('success', 'Account created successfully, Redirecting...');
       navigate('/');
+      Toast('success', 'Account created successfully, Redirecting...');
     },
     onError: error => {
       Toast('error', 'Error Creating account, Please try again');

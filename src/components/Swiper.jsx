@@ -28,17 +28,14 @@ function Swiper({ slides }) {
   return (
     <div
       {...handlers}
-      className="flex h-[12.5rem] items-center justify-center overflow-x-hidden lg:h-[45.75rem]"
+      className="relative flex h-[12.5rem] items-center justify-center overflow-x-hidden lg:h-[30.75rem]"
     >
-      {/* <div className="absolute z-10">
-        <button onClick={onLeft}>
-          <ArrowLeftIcon className="h-6 w-6" />
-        </button>
-        <button onClick={onRight}>
-          <ArrowRightIcon className="h-6 w-6" />
-        </button>
-      </div> */}
-      <div className="relative z-10"></div>
+      <button className="absolute left-0 z-10 bg-white p-4 rounded-full" onClick={onLeft}>
+        <ArrowLeftIcon className="h-6 w-6" />
+      </button>
+      <button className="absolute right-0 z-10 bg-white p-4 rounded-full" onClick={onRight}>
+        <ArrowRightIcon className="h-6 w-6" />
+      </button>
       <div className="relative h-full w-full">
         {slides.map((slide, index) => (
           <motion.div
@@ -65,14 +62,17 @@ function Swiper({ slides }) {
               <div className="absolute inset-0 h-full w-full items-end bg-primary-black-500/20">
                 <div className="flex h-full items-end justify-end p-4">
                   <div className="flex-1">
-                    <p className="text-xs font-medium text-white">
+                    <p className="text-xs font-medium text-white lg:text-base">
                       {slide.hashtag}
                     </p>
-                    <h3 className="font-neue text-2xl leading-none text-white">
+                    <h3 className="font-neue text-2xl leading-none text-white lg:text-[3.25rem]">
                       {slide.title}
                     </h3>
                   </div>
-                  <Link className="flex  items-center justify-end gap-x-1 rounded-full border border-primary-black-500 px-[0.875rem] py-2 text-xs">
+                  <Link
+                    to="/product"
+                    className="flex  items-center justify-end gap-x-1 rounded-full border border-primary-black-500 px-[0.875rem] py-2 text-xs lg:px-6 lg:py-4"
+                  >
                     Shop Now{' '}
                     <span>
                       <ArrowUpRightIcon className="h-4 w-4 text-primary-black-500" />

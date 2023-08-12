@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useSignOut } from '../hooks/useSignOut';
-import { useDeleteUser } from '../hooks/useDeleteUser';
 import { useModal } from '../context/ModalContext';
 import Modal from './Modal';
 
@@ -18,9 +17,7 @@ function classNames(...classes) {
 }
 
 function Navbar() {
-  // const { deleteUser } = useDeleteUser();
   const { logout } = useSignOut();
-  // const { deleteUser } = useDeleteUser();
   const { setIsModalOpen } = useModal();
 
   return (

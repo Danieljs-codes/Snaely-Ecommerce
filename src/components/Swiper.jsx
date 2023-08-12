@@ -30,10 +30,16 @@ function Swiper({ slides }) {
       {...handlers}
       className="relative flex h-[12.5rem] items-center justify-center overflow-x-hidden lg:h-[30.75rem]"
     >
-      <button className="absolute left-0 z-10 bg-white p-4 rounded-full" onClick={onLeft}>
+      <button
+        className="absolute left-0 z-10 hidden rounded-full bg-white p-4 md:block"
+        onClick={onLeft}
+      >
         <ArrowLeftIcon className="h-6 w-6" />
       </button>
-      <button className="absolute right-0 z-10 bg-white p-4 rounded-full" onClick={onRight}>
+      <button
+        className="absolute right-0 z-10 hidden rounded-full bg-white p-4 md:block"
+        onClick={onRight}
+      >
         <ArrowRightIcon className="h-6 w-6" />
       </button>
       <div className="relative h-full w-full">

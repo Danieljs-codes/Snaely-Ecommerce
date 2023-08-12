@@ -1,7 +1,8 @@
-import HeroDesktop from '../components/HeroDesktop';
-import HeroMobile from '../components/HeroMobile';
-import Marquee from '../components/Marquee';
-import Swiper from '../components/Swiper';
+import HeroDesktop from "../components/HeroDesktop";
+import HeroMobile from "../components/HeroMobile";
+import Marquee from "../components/Marquee";
+import Swiper from "../components/Swiper";
+import NewArrivals from "../components/NewArrivals.jsx";
 
 function Home() {
   return (
@@ -15,25 +16,26 @@ function Home() {
           <Swiper
             slides={[
               {
-                img: 'swiper-1.png',
-                hashtag: '#outfitoftheday',
-                title: 'Bunch Beach party collections',
+                img: "swiper-1.png",
+                hashtag: "#outfitoftheday",
+                title: "Bunch Beach party collections",
               },
               {
-                img: 'swiper-2.png',
-                hashtag: '#femininestyle',
-                title: 'Sunny day Outfit',
+                img: "swiper-2.png",
+                hashtag: "#femininestyle",
+                title: "Sunny day Outfit",
               },
               {
-                img: 'swiper-3.png',
-                hashtag: '#latestrelease',
-                title: 'Beauty at its Peak',
+                img: "swiper-3.png",
+                hashtag: "#latestrelease",
+                title: "Beauty at its Peak",
               },
             ]}
           />
         </div>
         <Marquee />
       </div>
+      <NewArrivals />
     </>
   );
 }

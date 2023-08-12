@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
-  ArrowRightIcon,
   ArrowLeftIcon,
+  ArrowRightIcon,
   ArrowUpRightIcon,
-} from '@heroicons/react/24/solid';
-import { useSwipeable } from 'react-swipeable';
-import { Link } from 'react-router-dom';
+} from "@heroicons/react/24/solid";
+import { useSwipeable } from "react-swipeable";
+import LinkButton from "./LinkButton.jsx";
 
 function Swiper({ slides }) {
   const [position, setPosition] = useState(0);
@@ -52,7 +52,7 @@ function Swiper({ slides }) {
               translateX: `${(index - position) * 100}vw`,
             }}
             transition={{
-              type: 'tween ',
+              type: "tween ",
               stiffness: 260,
               damping: 20,
             }}
@@ -75,15 +75,13 @@ function Swiper({ slides }) {
                       {slide.title}
                     </h3>
                   </div>
-                  <Link
-                    to="/product"
-                    className="flex  items-center justify-end gap-x-1 rounded-full border border-primary-black-500 px-[0.875rem] py-2 text-xs lg:px-6 lg:py-4"
-                  >
-                    Shop Now{' '}
-                    <span>
+                  <LinkButton
+                    icon={
                       <ArrowUpRightIcon className="h-4 w-4 text-primary-black-500" />
-                    </span>
-                  </Link>
+                    }
+                    text="Shop Now"
+                    path="/product"
+                  />
                 </div>
               </div>
             </div>

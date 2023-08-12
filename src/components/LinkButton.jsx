@@ -1,0 +1,15 @@
+import { Link } from "react-router-dom";
+
+function LinkButton({ text, icon, path }) {
+  return (
+    <Link
+      className="flex items-center gap-x-2 rounded-full border border-primary-black-500 px-6 py-3 text-xs font-medium md:text-sm lg:text-base"
+      to={path}
+    >
+      {text}
+      {icon}
+    </Link>
+  );
+}
+
+export default LinkButton;

@@ -20,6 +20,11 @@ const navigation = {
     { name: 'Press', href: '#' },
     { name: 'Partners', href: '#' },
   ],
+  legal: [
+    { name: 'Claim', href: '#' },
+    { name: 'Privacy', href: '#' },
+    { name: 'Terms', href: '#' },
+  ],
   social: [
     {
       name: 'Facebook',
@@ -165,6 +170,18 @@ function Footer() {
                         {item.name}
                       </a>
                     </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <h3  className="font-neue text-sm font-semibold leading-6 text-white">Legal</h3>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.legal.map((item) => (
+                      <li key={item.name}>
+                        <a href={item.href} className="text-sm leading-6 text-gray-300 hover:text-white">
+                          {item.name}
+                        </a>
+                      </li>
                   ))}
                 </ul>
               </div>

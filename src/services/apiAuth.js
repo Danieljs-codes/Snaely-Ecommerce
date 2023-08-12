@@ -1,4 +1,4 @@
-import supabase from './supabase';
+import supabase from "./supabase";
 
 export async function signUpWithEmailAndPassword({
   email,
@@ -18,10 +18,11 @@ export async function signUpWithEmailAndPassword({
   });
 
   if (error)
-    throw new Error('Error Signing up try again with your email and password');
+    throw new Error("Error Signing up try again with your email and password");
 
   return data;
 }
+
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
 
@@ -29,22 +30,23 @@ export async function getCurrentUser() {
 
   const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(error.message || 'Error getting user');
+  if (error) throw new Error(error.message || "Error getting user");
 
   return data.user;
 }
 
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
-  if (error) throw new Error(error.message || 'Error logging out');
+  if (error) throw new Error(error.message || "Error logging out");
 }
 
 export async function deleteAccount() {
-  const { error } = await supabase.rpc('delete_user');
+  const { error } = await supabase.rpc("delete_user");
   signOut();
 
-  if (error) throw new Error(error.message || 'Error deleting account');
+  if (error) throw new Error(error.message || "Error deleting account");
 }
+
 // Then, updating the deleteAccount function to use the new function: */
 
 export async function signInWithEmailAndPassword({ email, password }) {
@@ -52,9 +54,22 @@ export async function signInWithEmailAndPassword({ email, password }) {
     email: email,
     password: password,
   });
-  if (error)
+  if (error) {
     throw new Error(
-      error.message || 'Error signing in with email and password'
+      error.message || "Error signing in with email and password"
     );
+  }
+  return data;
+}
+
+export async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+
+  if (error) {
+    throw new Error(error.message || "Error signing in with Google");
+  }
+
   return data;
 }

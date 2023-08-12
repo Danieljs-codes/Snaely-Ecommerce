@@ -1,5 +1,6 @@
 import HeroDesktop from '../components/HeroDesktop';
 import HeroMobile from '../components/HeroMobile';
+import Marquee from '../components/Marquee';
 import Swiper from '../components/Swiper';
 
 function Home() {
@@ -31,6 +32,7 @@ function Home() {
             ]}
           />
         </div>
+        <Marquee />
       </div>
     </>
   );

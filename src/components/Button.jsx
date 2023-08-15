@@ -1,4 +1,4 @@
-import { twMerge } from "tailwind-merge";
+import { twMerge } from 'tailwind-merge';
 
 function Spinner() {
   return (
@@ -29,8 +29,8 @@ function Button({ disabled, isLoading, children, className, ...rest }) {
     <button
       {...rest}
       className={twMerge(
-        "mt-10 block flex w-full items-center justify-center rounded-full bg-primary-black-500 py-4 text-center" +
-          " text-base font-medium text-white",
+        'mt-10 flex w-full items-center justify-center rounded-full bg-primary-black-500 py-4 text-center' +
+          ' text-base font-medium text-white',
 
         className
       )}

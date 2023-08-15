@@ -1,14 +1,14 @@
-import { Outlet } from "react-router-dom";
-import { ModalProvider } from "../context/ModalContext";
+import { Outlet } from 'react-router-dom';
+import { ModalProvider } from '../context/ModalContext';
 
-import Navbar from "./Navbar";
-import Banner from "./Banner";
-import Footer from "./Footer";
+import Navbar from './Navbar';
+import Promo from './Promo';
+import Footer from './Footer';
 
 function AppLayout() {
   return (
     <main>
-      <Banner />
+      <Promo />
       <ModalProvider>
         <Navbar />
       </ModalProvider>

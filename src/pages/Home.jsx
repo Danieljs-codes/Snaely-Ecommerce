@@ -2,9 +2,9 @@ import HeroDesktop from '../components/HeroDesktop';
 import HeroMobile from '../components/HeroMobile';
 import Marquee from '../components/Marquee';
 import Swiper from '../components/Swiper';
-import NewArrivals from '../components/NewArrivals.jsx';
-import ShowcaseProducts from '../components/ShowcaseProducts.jsx';
-import PictureUpload from '../components/PictureUpload.jsx';
+import NewArrivals from '../components/NewArrivals';
+import ShowcaseProducts from '../components/ShowcaseProducts';
+import Banner from '../components/Banner';
 
 function Home() {
   return (
@@ -39,7 +39,7 @@ function Home() {
       </div>
       <NewArrivals />
       <ShowcaseProducts />
-      {/* <PictureUpload /> */}
+      <Banner />
     </>
   );
 }

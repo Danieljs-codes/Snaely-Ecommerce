@@ -10,8 +10,8 @@ import { useSignOut } from "../hooks/useSignOut";
 import { useModal } from "../context/ModalContext";
 import Modal from "./Modal";
 import Logo from "./Logo";
-
 import ProfileDropdown from "./ProfileDropdown";
+import { useCart } from "../context/CartContext.jsx";
 
 const navigation = [
   { name: "Product", href: "/product", current: true },
@@ -31,6 +31,12 @@ function classNames(...classes) {
 function Navbar() {
   const { logout } = useSignOut();
   const { setIsModalOpen } = useModal();
+  const { cartItems } = useCart();
+
+  const cartItemsLength = cartItems.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
 
   return (
     <>
@@ -82,16 +88,19 @@ function Navbar() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <Disclosure.Button as={Link} to="/cart">
-                    {/*<Link to="/cart">*/}
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 text-xs sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <Link className="relative" to="/cart">
                     <span className="sr-only">Shopping Cart</span>
                     <ShoppingCartIcon
                       className="h-6 w-6 text-primary-black-500"
                       aria-hidden="true"
                     />
-                    {/*</Link>*/}
-                  </Disclosure.Button>
+                    {cartItemsLength > 0 && (
+                      <span className="absolute -right-[5px] -top-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-white">
+                        {cartItemsLength}
+                      </span>
+                    )}
+                  </Link>
 
                   {/* Profile dropdown */}
                   <ProfileDropdown
@@ -145,6 +154,7 @@ function Navbar() {
       <Modal
         title="Deactivate account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone."
+        type="delete"
       />
     </>
   );

@@ -42,7 +42,7 @@ export async function signOut() {
 
 export async function deleteAccount() {
   const { error } = await supabase.rpc("delete_user");
-  signOut();
+  await signOut();
 
   if (error) throw new Error(error.message || "Error deleting account");
 }
@@ -64,10 +64,9 @@ export async function signInWithEmailAndPassword({ email, password }) {
 
 export async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "http://localhost:5173",
-    },
+    provider: "google", // options: {
+    //   redirectTo: "http://localhost:5173",
+    // },
   });
 
   if (error) {

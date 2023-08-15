@@ -1,4 +1,4 @@
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 
 function Logo({ className }) {
   return (
@@ -7,7 +7,7 @@ function Logo({ className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={twMerge(
-        'h-[24px] w-[78px] md:h-[28px] md:w-[91px]',
+        "h-[24px] w-[78px] md:h-[28px] md:w-[91px]",
         className
       )}
     >

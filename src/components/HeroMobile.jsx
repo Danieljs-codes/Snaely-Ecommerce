@@ -1,5 +1,3 @@
-import Swiper from './Swiper';
-
 function HeroMobile() {
   return (
     <div className="md:hidden">

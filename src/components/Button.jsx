@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 function Spinner() {
   return (
     <div role="status">
@@ -22,11 +24,16 @@ function Spinner() {
   );
 }
 
-function Button({ disabled, isLoading, children, ...rest }) {
+function Button({ disabled, isLoading, children, className, ...rest }) {
   return (
     <button
       {...rest}
-      className="mt-10 block flex w-full items-center justify-center rounded-full bg-primary-black-500 py-4 text-center text-base font-medium text-white"
+      className={twMerge(
+        "mt-10 block flex w-full items-center justify-center rounded-full bg-primary-black-500 py-4 text-center" +
+          " text-base font-medium text-white",
+
+        className
+      )}
       disabled={disabled}
     >
       {isLoading ? <Spinner /> : children}

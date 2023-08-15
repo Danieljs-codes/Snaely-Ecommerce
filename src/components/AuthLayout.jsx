@@ -1,11 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import Logo from './Logo';
+import { Outlet, useLocation } from "react-router-dom";
+import Logo from "./Logo";
 
 function AuthLayout() {
   const location = useLocation();
 
-  const pathName = location.pathname.split('/')[1];
+  const pathName = location.pathname.split("/")[1];
 
   return (
     <main className="h-screen px-5">
@@ -13,14 +12,14 @@ function AuthLayout() {
         <div className="py-8">
           <Logo />
           <h1 className="mt-12 font-neue text-[32px]">
-            {pathName === 'sign-up'
-              ? 'Create an Account'
-              : 'Log in into your Account'}
+            {pathName === "sign-up"
+              ? "Create an Account"
+              : "Log in into your Account"}
           </h1>
           <p className="mt-3 max-w-[17rem] text-sm text-[#8E8F94]">
-            {pathName === 'sign-up'
-              ? 'Join to start shopping and stay up-to-date on the latest deals.'
-              : 'Log in to your account to shopping the newest fashion style'}
+            {pathName === "sign-up"
+              ? "Join to start shopping and stay up-to-date on the latest deals."
+              : "Log in to your account to shopping the newest fashion style"}
           </p>
           <Outlet />
         </div>

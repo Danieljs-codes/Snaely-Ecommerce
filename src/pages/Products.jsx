@@ -126,7 +126,7 @@ function Products() {
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-                <form className="mt-4 border-t border-gray-200">
+                <form className="mt-4 border-t border-gray-200 px-4">
                   {filtersFacet.map(section => (
                     <Filter
                       key={section.id}
@@ -135,6 +135,7 @@ function Products() {
                       isFilterActive={isFilterActive}
                     />
                   ))}
+                  <ClearFiltersButton clearFilters={clearFilters} />
                 </form>
               </Dialog.Panel>
             </Transition.Child>

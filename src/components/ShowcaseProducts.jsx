@@ -69,7 +69,7 @@ function ShowcaseProducts() {
               <ArrowUpRightIcon className="h-4 w-4 text-primary-black-500" />
             }
             text="More Collection"
-            path="/product"
+            path="/products"
             className="mb-0 mt-8 w-fit justify-center text-center"
           />
         </div>

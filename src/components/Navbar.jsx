@@ -1,31 +1,31 @@
-import { Fragment } from "react";
-import { Disclosure } from "@headlessui/react";
+import { Fragment } from 'react';
+import { Disclosure } from '@headlessui/react';
 import {
   Bars3Icon,
   ShoppingCartIcon,
   XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
-import { useSignOut } from "../hooks/useSignOut";
-import { useModal } from "../context/ModalContext";
-import Modal from "./Modal";
-import Logo from "./Logo";
-import ProfileDropdown from "./ProfileDropdown";
-import { useCart } from "../context/CartContext.jsx";
+} from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
+import { useSignOut } from '../hooks/useSignOut';
+import { useModal } from '../context/ModalContext';
+import Modal from './Modal';
+import Logo from './Logo';
+import ProfileDropdown from './ProfileDropdown';
+import { useCart } from '../context/CartContext.jsx';
 
 const navigation = [
-  { name: "Product", href: "/product", current: true },
+  { name: 'Products', href: '/products', current: true },
   {
-    name: "Blogs",
-    href: "/blogs",
+    name: 'Blogs',
+    href: '/blogs',
     current: false,
   },
-  { name: "Contact Us", href: "/contact ", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: 'Contact Us', href: '/contact ', current: false },
+  { name: 'Calendar', href: '#', current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 function Navbar() {
@@ -70,17 +70,17 @@ function Navbar() {
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
+                      {navigation.map(item => (
                         <Link
                           key={item.name}
                           to={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-primary-black-500 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                              ? 'bg-gray-900 text-white'
+                              : 'text-primary-black-500 hover:bg-gray-700 hover:text-white',
+                            'rounded-md px-3 py-2 text-sm font-medium'
                           )}
-                          aria-current={item.current ? "page" : undefined}
+                          aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
                         </Link>
@@ -130,18 +130,18 @@ function Navbar() {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'block rounded-md px-3 py-2 text-base font-medium'
                     )}
-                    aria-current={item.current ? "page" : undefined}
+                    aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
                   </Disclosure.Button>

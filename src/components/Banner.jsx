@@ -24,7 +24,7 @@ function Banner() {
           className="mx-auto w-fit"
           icon={<ArrowUpRightIcon className="h-4 w-4 text-primary-black-500" />}
           text="Join our Newsletter"
-          path="/product"
+          path="/products"
         />
       </div>
     </div>

@@ -1,0 +1,132 @@
+import { useState } from 'react';
+import { useProductFilter } from '../hooks/useProductFilter';
+import { formatCurrency } from '../utils/helpers';
+
+function Products() {
+  const { handleFilterChange, filteredProducts, filters } = useProductFilter();
+  const [sort, setSort] = useState('default');
+
+  const handleSortChange = value => {
+    setSort(value);
+  };
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sort) {
+      case 'name':
+        return a.product_name.localeCompare(b.product_name);
+      case 'price(H-L)':
+        return a.price - b.price;
+      case 'price(L-H)':
+        return b.price - a.price;
+      default:
+        return 0;
+    }
+  });
+
+  return (
+    <div>
+      <div>
+        <h2>Sort by:</h2>
+        <select value={sort} onChange={handleSortChange}>
+          <option value="default">Default</option>
+          <option value="name">Name</option>
+          <option value="price(L-H)">Price (High to Low)</option>
+          <option value="price(H-L)">Price (Low to High)</option>
+        </select>
+      </div>
+      <div>
+        <h2>Filter by Color:</h2>
+        <label>
+          <input
+            type="checkbox"
+            value="Burgundy"
+            onChange={e => handleFilterChange(e, 'color')}
+          />
+          Burgundy
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Light Coral"
+            onChange={e => handleFilterChange(e, 'color')}
+          />
+          Light Coral
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Light Beige"
+            onChange={e => handleFilterChange(e, 'color')}
+          />
+          Light Beige
+        </label>
+      </div>
+      <div>
+        <h2>Filter by Category:</h2>
+        <label>
+          <input
+            type="checkbox"
+            value="bottoms"
+            onChange={e => handleFilterChange(e, 'category')}
+          />
+          Bottoms
+        </label>
+      </div>
+      <div>
+        <h2>Filter by Size:</h2>
+        <label>
+          <input
+            type="checkbox"
+            value="XS"
+            onChange={e => handleFilterChange(e, 'size')}
+          />
+          XS
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="S"
+            onChange={e => handleFilterChange(e, 'size')}
+          />
+          S
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="M"
+            onChange={e => handleFilterChange(e, 'size')}
+          />
+          M
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="L"
+            onChange={e => handleFilterChange(e, 'size')}
+          />
+          L
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="XL"
+            onChange={e => handleFilterChange(e, 'size')}
+          />
+          XL
+        </label>
+      </div>
+      <div>
+        <h2>Filtered Products:</h2>
+        {sortedProducts.map(product => (
+          <div key={product.product_id}>
+            <h3>{product.product_name}</h3>
+            <p>{product.description}</p>
+            <p>{formatCurrency(product.price)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Products;

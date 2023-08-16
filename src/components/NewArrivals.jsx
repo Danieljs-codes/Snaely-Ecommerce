@@ -6,12 +6,12 @@ const arrivalCardDetails = [
   {
     img: "Man.png",
     text: "For Man",
-    path: "/product",
+    path: "/products",
   },
   {
     img: "Woman.png",
     text: "For Woman",
-    path: "/product",
+    path: "/products",
   },
 ];
 
@@ -24,7 +24,7 @@ function NewArrivals() {
         <LinkButton
           icon={<ArrowUpRightIcon className="h-4 w-4 text-primary-black-500" />}
           text="See All"
-          path="/product"
+          path="/products"
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2">

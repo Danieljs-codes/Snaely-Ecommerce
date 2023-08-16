@@ -26,9 +26,9 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    // <UserProvider>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
+
       <CartProvider>
         <BrowserRouter>
           <Routes>
@@ -41,8 +41,8 @@ function App() {
               }
             >
               <Route index element={<Home />} />
-              <Route path="product" element={<Products />} />
-              <Route path="product/:id" element={<Product />} />
+              <Route path="products" element={<Products />} />
+              <Route path="products/:id" element={<Product />} />
               <Route path="cart" element={<Cart />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="upload-picture" element={<UploadPicture />} />

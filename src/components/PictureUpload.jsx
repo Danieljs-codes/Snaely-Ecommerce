@@ -1,14 +1,10 @@
 import { useRef, useState } from 'react';
 import InputUpload from './InputUpload';
 
-function handleFile(files) {
-  alert('Number of files: ' + files.length);
-}
-
 function PictureUpload() {
   const [file, setFile] = useState('');
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const [size, setSize] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState([]);
+  const [size, setSize] = useState([]);
   // Step 1 Create a state for dragging
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef(null);
@@ -36,9 +32,9 @@ function PictureUpload() {
       const { name } = file;
       const { size } = file;
       setFile(name);
-      setSize(size);
+      setSize(p => [...p, size]);
       const imageUrl = URL.createObjectURL(file);
-      setPreviewUrl(imageUrl);
+      setPreviewUrl(p => [...p, imageUrl]);
       setFile(e.dataTransfer.files);
       console.log(file);
 
@@ -51,17 +47,18 @@ function PictureUpload() {
     if (e.target.files && e.target.files[0]) {
       // setFile(e.target.files[0]);
       const file = e.target.files[0];
+      console.log(e.target.files);
       const { name } = file;
       const { size } = file;
       setFile(name);
-      setSize(size);
+      setSize(p => [...p, size]);
       const imageUrl = URL.createObjectURL(file);
-      setPreviewUrl(imageUrl);
+      setPreviewUrl(p => [...p, imageUrl]);
     }
   }
 
   return (
-    <>
+    <div>
       <form
         onDragEnter={handleDrag}
         className="relative mx-auto flex w-full max-w-[31.25rem] items-center justify-center overflow-hidden"
@@ -114,8 +111,13 @@ function PictureUpload() {
           ></div>
         ) : null}
       </form>
-      {previewUrl && <InputUpload img={previewUrl} size={size} />}
-    </>
+      <div>
+        {previewUrl &&
+          previewUrl.map((url, index) => (
+            <img key={index} src={url} alt="preview" />
+          ))}
+      </div>
+    </div>
   );
 }
 

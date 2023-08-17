@@ -1,132 +1,133 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { useSearchParams } from 'react-router-dom';
+import { PRODUCTS_PER_PAGE } from '../utils/constants';
 import { useState } from 'react';
-import { useProductFilter } from '../hooks/useProductFilter';
-import { formatCurrency } from '../utils/helpers';
 
-function Products() {
-  const { handleFilterChange, filteredProducts, filters } = useProductFilter();
-  const [sort, setSort] = useState('default');
+function Pagination({ count }) {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSortChange = value => {
-    setSort(value);
-  };
+  const [showInput, setShowInput] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sort) {
-      case 'name':
-        return a.product_name.localeCompare(b.product_name);
-      case 'price(H-L)':
-        return a.price - b.price;
-      case 'price(L-H)':
-        return b.price - a.price;
-      default:
-        return 0;
+  function handleInputChange(e) {
+    setInputValue(e.target.value);
+  }
+
+  function handleInputSubmit(e) {
+    e.preventDefault();
+    const pageNumber = Number(inputValue);
+    if (pageNumber >= 1 && pageNumber <= pageCount) {
+      searchParams.set('page', pageNumber);
+      setSearchParams(searchParams);
+      setShowInput(false);
     }
-  });
+  }
+
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const pageCount = Math.ceil(count / PRODUCTS_PER_PAGE);
+
+  function prevPage() {
+    const prevPage = currentPage === 1 ? currentPage : currentPage - 1;
+    searchParams.set('page', prevPage);
+    setSearchParams(searchParams);
+  }
+
+  function nextPage() {
+    const nextPage = currentPage === pageCount ? currentPage : currentPage + 1;
+
+    searchParams.set('page', nextPage);
+    setSearchParams(searchParams);
+  }
+
+  if (pageCount <= 1) return null;
 
   return (
-    <div>
-      <div>
-        <h2>Sort by:</h2>
-        <select value={sort} onChange={handleSortChange}>
-          <option value="default">Default</option>
-          <option value="name">Name</option>
-          <option value="price(L-H)">Price (High to Low)</option>
-          <option value="price(H-L)">Price (Low to High)</option>
-        </select>
-      </div>
-      <div>
-        <h2>Filter by Color:</h2>
-        <label>
-          <input
-            type="checkbox"
-            value="Burgundy"
-            onChange={e => handleFilterChange(e, 'color')}
-          />
-          Burgundy
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Light Coral"
-            onChange={e => handleFilterChange(e, 'color')}
-          />
-          Light Coral
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Light Beige"
-            onChange={e => handleFilterChange(e, 'color')}
-          />
-          Light Beige
-        </label>
-      </div>
-      <div>
-        <h2>Filter by Category:</h2>
-        <label>
-          <input
-            type="checkbox"
-            value="bottoms"
-            onChange={e => handleFilterChange(e, 'category')}
-          />
-          Bottoms
-        </label>
-      </div>
-      <div>
-        <h2>Filter by Size:</h2>
-        <label>
-          <input
-            type="checkbox"
-            value="XS"
-            onChange={e => handleFilterChange(e, 'size')}
-          />
-          XS
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="S"
-            onChange={e => handleFilterChange(e, 'size')}
-          />
-          S
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="M"
-            onChange={e => handleFilterChange(e, 'size')}
-          />
-          M
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="L"
-            onChange={e => handleFilterChange(e, 'size')}
-          />
-          L
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="XL"
-            onChange={e => handleFilterChange(e, 'size')}
-          />
-          XL
-        </label>
-      </div>
-      <div>
-        <h2>Filtered Products:</h2>
-        {sortedProducts.map(product => (
-          <div key={product.product_id}>
-            <h3>{product.product_name}</h3>
-            <p>{product.description}</p>
-            <p>{formatCurrency(product.price)}</p>
-          </div>
-        ))}
+    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+      <div className="flex flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm text-gray-700">
+            Showing{' '}
+            <span className="font-medium">
+              {(currentPage - 1) * PRODUCTS_PER_PAGE + 1}
+            </span>{' '}
+            to{' '}
+            <span className="font-medium">
+              {currentPage === pageCount
+                ? count
+                : currentPage * PRODUCTS_PER_PAGE}
+            </span>{' '}
+            of <span className="font-medium">{count}</span> results
+          </p>
+        </div>
+        <div>
+          <nav
+            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+            aria-label="Pagination"
+          >
+            <button
+              disabled={currentPage === 1}
+              onClick={prevPage}
+              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              <span className="sr-only">Previous</span>
+              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
+            {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
+            {/* <a
+              href="/"
+              aria-current="page"
+              className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              1
+            </a>
+
+            <a
+              href="/"
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              10
+            </a> */}
+            <button>
+              {Array.from({ length: pageCount }).map((_, index) => (
+                <a
+                  key={index}
+                  href="/"
+                  className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
+                    currentPage === index + 1
+                      ? 'z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                      : ''
+                  }`}
+                >
+                  {index + 1}
+                </a>
+              ))}
+              <button onClick={() => setShowInput(!showInput)}>...</button>
+              {showInput && (
+                <form onSubmit={handleInputSubmit}>
+                  <input
+                    type="number"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    min="1"
+                    max={pageCount}
+                  />
+                  <button type="submit">Go</button>
+                </form>
+              )}
+            </button>
+            <button
+              onClick={nextPage}
+              disabled={currentPage === pageCount}
+              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              <span className="sr-only">Next</span>
+              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </nav>
+        </div>
       </div>
     </div>
   );
 }
-
-export default Products;
+export default Pagination;

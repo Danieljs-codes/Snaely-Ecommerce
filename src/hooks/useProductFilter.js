@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useProducts } from './useProducts';
 
 export function useProductFilter() {
-  const { products } = useProducts();
+  const { products, count } = useProducts();
 
   const initialFilters = {
     color: [],
@@ -58,5 +58,6 @@ export function useProductFilter() {
     filters,
     clearFilters,
     isFilterActive,
+    count,
   };
 }

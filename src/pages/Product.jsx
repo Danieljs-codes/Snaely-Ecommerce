@@ -13,11 +13,7 @@ function Product() {
     return <Spinner />;
   }
 
-  return (
-    <div>
-      <ShowcaseCard showcase={product} id={product.product_id} />
-    </div>
-  );
+  return <div>Products</div>;
 }
 
 export default Product;

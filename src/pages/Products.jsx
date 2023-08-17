@@ -10,6 +10,8 @@ import { useProductFilter } from '../hooks/useProductFilter';
 import Filter from '../components/Filter';
 import ClearFiltersButton from '../components/ClearFiltersButton';
 import ProductGrid from '../components/ProductGrid';
+import Pagination from '../components/Pagination';
+import { useProducts } from '../hooks/useProducts';
 
 const sortOptions = [
   { name: 'Default', value: 'default' },
@@ -60,6 +62,7 @@ function classNames(...classes) {
 }
 
 function Products() {
+  const { count } = useProducts();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const { handleFilterChange, filteredProducts, clearFilters, isFilterActive } =
     useProductFilter();
@@ -144,7 +147,7 @@ function Products() {
           </div>
         </Dialog>
       </Transition.Root>
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">
             New Arrivals
@@ -204,7 +207,10 @@ function Products() {
             </button>
           </div>
         </div>
-        <section aria-labelledby="products-heading" className="pb-24 pt-6">
+        <section
+          aria-labelledby="products-heading"
+          className="border-b border-primary-black-500 pb-24 pt-6"
+        >
           <h2 id="products-heading" className="sr-only">
             Products
           </h2>
@@ -227,9 +233,10 @@ function Products() {
             </form>
             <ProductGrid sortedProducts={sortedProducts} />
           </div>
-          {/* TODO: Implement Pagination (10 products per page) */}
+          {/* TODO: Implement Reusable Pagination (10 products per page) */}
         </section>
-      </main>
+        <Pagination count={count} />
+      </div>
     </div>
   );
 }

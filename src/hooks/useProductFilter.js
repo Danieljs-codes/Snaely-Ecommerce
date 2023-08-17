@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useProducts } from './useProducts';
 
 export function useProductFilter() {
-  const { isLoading, products } = useProducts();
+  const { products } = useProducts();
+
   const initialFilters = {
     color: [],
     category: [],
@@ -20,11 +21,12 @@ export function useProductFilter() {
 
   const handleFilterChange = (e, filterType) => {
     const selectedFilter = e.target.value.toLowerCase();
-    if (
-      filters[filterType]
-        .map(filter => filter.toLowerCase())
-        .includes(selectedFilter)
-    ) {
+
+    const isProductFiltered = filters[filterType]
+      .map(filter => filter.toLowerCase())
+      .includes(selectedFilter);
+
+    if (isProductFiltered) {
       setFilters({
         ...filters,
         [filterType]: filters[filterType].filter(
@@ -39,24 +41,16 @@ export function useProductFilter() {
     }
   };
 
-  const filteredProducts =
-    products && products.length > 0
-      ? products.filter(
-          product =>
-            (filters.color.length === 0 ||
-              product.colors
-                .map(color => color.toLowerCase())
-                .some(item => filters.color.includes(item))) &&
-            (filters.category.length === 0 ||
-              filters.category.includes(
-                product.categories.category_name.toLowerCase()
-              )) &&
-            (filters.size.length === 0 ||
-              product.size
-                .map(size => size.toLowerCase())
-                .some(item => filters.size.includes(item)))
-        )
-      : [];
+  // prettier-ignore
+  const filteredProducts = products && products.length > 0 ? products.filter(product => {
+        const colorFilterPassed = filters.color.length === 0 || product.colors.some(color => filters.color.includes(color.toLowerCase()));
+
+        const categoryFilterPassed = filters.category.length === 0 || filters.category.includes(product.categories.category_name.toLowerCase());
+
+        const sizeFilterPassed = filters.size.length === 0 || product.size.some(size => filters.size.includes(size.toLowerCase()));
+
+        return colorFilterPassed && categoryFilterPassed && sizeFilterPassed;
+    }) : [];
 
   return {
     handleFilterChange,

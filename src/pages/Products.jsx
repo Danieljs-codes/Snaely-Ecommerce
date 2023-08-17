@@ -2,7 +2,6 @@
 import { useState, Fragment } from 'react';
 import { Dialog, Transition, Menu } from '@headlessui/react';
 import {
-  ChevronUpIcon,
   ChevronDownIcon,
   XMarkIcon,
   FunnelIcon,
@@ -69,6 +68,9 @@ function Products() {
   const handleSortChange = value => {
     setSort(value);
   };
+
+  // TODO: Sort by (A - Z) and (Z - A)
+  // TODO: Sort by price (low to high) and (high to low)
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sort) {
@@ -225,6 +227,7 @@ function Products() {
             </form>
             <ProductGrid sortedProducts={sortedProducts} />
           </div>
+          {/* TODO: Implement Pagination (10 products per page) */}
         </section>
       </main>
     </div>

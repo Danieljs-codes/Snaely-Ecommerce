@@ -1,16 +1,15 @@
 // src/components/ProductGrid.jsx
-import { formatCurrency } from '../utils/helpers';
+import ShowcaseCard from './ShowcaseCard';
 
 function ProductGrid({ sortedProducts }) {
-  return (
-    <div className="space-y-4 lg:col-span-3">
-      {sortedProducts.map((product, i) => (
-        <div key={i}>
-          <div>{product.product_name}</div>
-          <div>{formatCurrency(product.price)}</div>
-        </div>
+  return sortedProducts.length > 0 ? (
+    <div className="grid grid-cols-3 lg:col-span-3 lg:gap-x-6 lg:gap-y-8">
+      {sortedProducts.map(product => (
+        <ShowcaseCard key={product.product_id} showcase={product} />
       ))}
     </div>
+  ) : (
+    <h2 className="text-2xl font-medium text-gray-900">No products found</h2>
   );
 }
 

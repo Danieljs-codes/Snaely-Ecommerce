@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
+import Toast from '../components/Toast';
 
 const CartContext = createContext();
 
@@ -6,10 +7,10 @@ function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
   function handleAddItem(itemToAdd) {
-    const existingItem = cartItems.find((item) => item.id === itemToAdd.id);
+    const existingItem = cartItems.find(item => item.id === itemToAdd.id);
 
     if (existingItem) {
-      const newCart = cartItems.map((item) =>
+      const newCart = cartItems.map(item =>
         item.id === itemToAdd.id
           ? {
               ...item,
@@ -18,23 +19,26 @@ function CartProvider({ children }) {
           : item
       );
       setCartItems(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
+
+      localStorage.setItem('cart', JSON.stringify(newCart));
     } else {
       const newCart = [...cartItems, itemToAdd];
       setCartItems(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
+      localStorage.setItem('cart', JSON.stringify(newCart));
     }
+
+    Toast('success', 'Item added to cart');
   }
 
   function handleDeleteItem(id) {
-    const itemToDelete = cartItems.find((item) => item.id === id);
+    const itemToDelete = cartItems.find(item => item.id === id);
 
     if (!itemToDelete) {
       return; // Item not found, no action needed
     }
 
     if (itemToDelete.quantity > 1) {
-      const newCartItems = cartItems.map((item) =>
+      const newCartItems = cartItems.map(item =>
         item.id === id
           ? {
               ...item,
@@ -44,36 +48,35 @@ function CartProvider({ children }) {
       );
       setCartItems(newCartItems);
     } else {
-      const updatedCart = cartItems.filter((item) => item.id !== id);
+      const updatedCart = cartItems.filter(item => item.id !== id);
       setCartItems(updatedCart);
     }
   }
 
-  function handleAddItem(itemToAdd) {
-    const existingItem = cartItems.find((item) => item.id === itemToAdd.id);
+  // function handleAddItem(itemToAdd) {
+  //   const existingItem = cartItems.find(item => item.id === itemToAdd.id);
 
-    if (existingItem) {
-      const newCart = cartItems.map((item) =>
-        item.id === itemToAdd.id
-          ? {
-              ...item,
-              quantity: item.quantity + itemToAdd.quantity,
-            }
-          : item
-      );
-      setCartItems(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    } else {
-      const newCart = [...cartItems, itemToAdd];
-      setCartItems(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    }
-  }
+  //   if (existingItem) {
+  //     const newCart = cartItems.map(item =>
+  //       item.id === itemToAdd.id
+  //         ? {
+  //             ...item,
+  //             quantity: item.quantity + itemToAdd.quantity,
+  //           }
+  //         : item
+  //     );
+  //     setCartItems(newCart);
+  //     localStorage.setItem('cart', JSON.stringify(newCart));
+  //   } else {
+  //     const newCart = [...cartItems, itemToAdd];
+  //     setCartItems(newCart);
+  //     localStorage.setItem('cart', JSON.stringify(newCart));
+  //   }
+  // }
 
   function handleDeleteAllItems() {
     setCartItems([]);
   }
-
 
   return (
     <CartContext.Provider
@@ -92,7 +95,7 @@ function CartProvider({ children }) {
 function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }

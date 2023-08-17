@@ -3,9 +3,13 @@ import ShowcaseCard from './ShowcaseCard';
 
 function ProductGrid({ sortedProducts }) {
   return sortedProducts.length > 0 ? (
-    <div className="grid grid-cols-3 lg:col-span-3 lg:gap-x-6 lg:gap-y-8">
+    <div className="grid grid-cols-1 gap-x-6 md:grid-cols-2 lg:col-span-3 lg:gap-y-8 xl:grid-cols-3">
       {sortedProducts.map(product => (
-        <ShowcaseCard key={product.product_id} showcase={product} />
+        <ShowcaseCard
+          key={product.product_id}
+          id={product.product_id}
+          showcase={product}
+        />
       ))}
     </div>
   ) : (

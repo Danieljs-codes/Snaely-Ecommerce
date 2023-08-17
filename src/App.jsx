@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './context/CartContext.jsx';
 import UploadPicture from './pages/UploadPicture';
+import PageNotFound from './pages/PageNotFound';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,7 +48,7 @@ function App() {
               <Route path="checkout" element={<Checkout />} />
               <Route path="upload-picture" element={<UploadPicture />} />
             </Route>
-            <Route path="*" element={<h1>404</h1>} />
+            <Route path="*" element={<PageNotFound />} />
             <Route element={<AuthLayout />}>
               <Route path="sign-up" element={<SignUp />} />
               <Route path="login" element={<Login />} />

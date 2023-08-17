@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
-import ShowcaseCard from '../components/ShowcaseCard';
 import Spinner from '../components/Spinner';
 
 function Product() {

@@ -34,6 +34,7 @@ function LoginForm() {
     onError: error => {
       Toast('error', error.message || 'Error Logging In 😢');
     },
+    retry: false,
   });
 
   // Define the submit callback function
@@ -111,7 +112,6 @@ function LoginForm() {
         <Button
           onClick={handleSubmit}
           isLoading={isLoading}
-          className="mt-10 block w-full rounded-full bg-primary-black-500 py-4 text-center text-base font-medium text-white"
           type="submit"
           disabled={isLoading}
         >

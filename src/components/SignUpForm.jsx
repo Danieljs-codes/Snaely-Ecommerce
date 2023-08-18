@@ -165,7 +165,6 @@ function SignUpForm() {
         <Button
           onClick={handleSubmit}
           isLoading={isLoading}
-          className="mt-10 block w-full rounded-full bg-primary-black-500 py-4 text-center text-base font-medium text-white"
           type="submit"
           disabled={isLoading}
         >

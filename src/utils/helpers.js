@@ -15,3 +15,7 @@ export const formatBytes = (bytes, decimals = 0) => {
 
   return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
 };
+
+export function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

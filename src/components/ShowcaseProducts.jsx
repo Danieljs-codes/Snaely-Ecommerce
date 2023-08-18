@@ -60,7 +60,11 @@ function ShowcaseProducts() {
         )}
         <div className="grid gap-y-5 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-7">
           {showcaseItems?.map(item => (
-            <ShowcaseCard key={item.product_id} showcase={item} />
+            <ShowcaseCard
+              key={item.product_id}
+              id={item.product_id}
+              showcase={item}
+            />
           ))}
         </div>
         <div className="lg:flex lg:items-center lg:justify-center">

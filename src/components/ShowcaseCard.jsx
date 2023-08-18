@@ -23,7 +23,7 @@ function ShowcaseCard({ showcase, id }) {
   }
 
   return (
-    <Link to={`${id}`}>
+    <Link to={`/products/${id}`}>
       <div className="text-left font-neue">
         <div className="group relative h-[20rem] overflow-hidden">
           <img

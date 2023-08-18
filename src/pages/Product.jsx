@@ -5,6 +5,7 @@ import Spinner from '../components/Spinner';
 function Product() {
   const { id } = useParams();
   const { isLoading, products } = useProducts();
+  console.log(products)
 
   const product = products?.find(product => product.product_id === id);
 

@@ -14,7 +14,7 @@ function PageNotFound() {
           <h1 className="text-[6.875rem]">404</h1>
           <h2 className="-mt-12 text-[3.5rem]">Fashion Lost in Cyberspace</h2>
           <p className="max-w-[46.25rem] font-sans text-gray-500">
-            Oops! It looks like the style you're searching for has done a
+            Oops! It looks like the style you&rsquo;re searching for has done a
             disappearing act. While we work our magic to find it, why not
             explore more stunning fashion on our homepage? Happy shopping!
           </p>

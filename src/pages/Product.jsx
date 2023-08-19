@@ -5,6 +5,7 @@ import { formatCurrency, delay } from '../utils/helpers';
 import { PRODUCT_COLORS, PRODUCT_SIZES } from '../utils/constants';
 import { RadioGroup } from '@headlessui/react';
 import { useCart } from '../context/CartContext';
+import { AnimatePresence, motion } from 'framer-motion';
 import Spinner from '../components/Spinner';
 
 function Product() {
@@ -44,7 +45,7 @@ function Product() {
       color: color,
     };
 
-    await delay(500);
+    await delay(1000);
     handleAddItem(itemToAdd);
     setAddingToCart(false);
   }
@@ -108,7 +109,7 @@ function Product() {
                 <RadioGroup.Option
                   key={size.size}
                   value={size.size}
-                  className={` ${
+                  className={`${
                     size.inStore
                       ? 'cursor-pointer focus:outline-none'
                       : 'cursor-not-allowed opacity-25'
@@ -148,9 +149,10 @@ function Product() {
         </div>
       </div>
       <div className="flex flex-col gap-y-4">
-        <button
+        <motion.button
           onClick={addToCart}
           disabled={addingToCart}
+          initial={false}
           className="mt-0 flex w-full items-center justify-center rounded-full border border-primary-black-500 bg-transparent py-3 text-sm text-primary-black-500"
         >
           {addingToCart ? (
@@ -188,8 +190,18 @@ function Product() {
               </svg>
             </span>
           )}
-          Add to Cart
-        </button>
+          <AnimatePresence>
+            <motion.span
+              initial={false}
+              animate={{
+                translateX: addingToCart ? '500%' : '0',
+                display: addingToCart ? 'none' : 'inline-block',
+              }}
+            >
+              Add to Cart
+            </motion.span>
+          </AnimatePresence>
+        </motion.button>
         <button
           disabled
           className="rounded-full bg-primary-black-500 py-3 text-sm text-grey-50 disabled:cursor-not-allowed"

@@ -41,7 +41,7 @@ function CartProvider({ children }) {
     const itemToDelete = cartItems.find(item => item.id === id);
 
     if (!itemToDelete) {
-      return; // Item not found, no action needed
+      return Toast('error', `Can't find item in cart`); // Item not found, no action needed
     }
 
     if (itemToDelete.quantity > 1) {
@@ -54,35 +54,17 @@ function CartProvider({ children }) {
           : item
       );
       setCartItems(newCartItems);
+      localStorage.setItem('cart', JSON.stringify(newCartItems));
     } else {
       const updatedCart = cartItems.filter(item => item.id !== id);
       setCartItems(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
     }
   }
 
-  // function handleAddItem(itemToAdd) {
-  //   const existingItem = cartItems.find(item => item.id === itemToAdd.id);
-
-  //   if (existingItem) {
-  //     const newCart = cartItems.map(item =>
-  //       item.id === itemToAdd.id
-  //         ? {
-  //             ...item,
-  //             quantity: item.quantity + itemToAdd.quantity,
-  //           }
-  //         : item
-  //     );
-  //     setCartItems(newCart);
-  //     localStorage.setItem('cart', JSON.stringify(newCart));
-  //   } else {
-  //     const newCart = [...cartItems, itemToAdd];
-  //     setCartItems(newCart);
-  //     localStorage.setItem('cart', JSON.stringify(newCart));
-  //   }
-  // }
-
   function handleDeleteAllItems() {
     setCartItems([]);
+    localStorage.setItem('cart', JSON.stringify([]));
   }
 
   return (

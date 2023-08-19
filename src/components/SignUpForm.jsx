@@ -2,7 +2,7 @@ import { FaApple, FaGoogle } from 'react-icons/fa6';
 import { IconContext } from 'react-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   signInWithGoogle,
   signUpWithEmailAndPassword,
@@ -14,9 +14,11 @@ import Toast from './Toast';
 import Button from './Button.jsx';
 
 function SignUpForm() {
+  // const queryClient = useQueryClient();
   // Define validation rules for each field
 
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const validationRules = {
     email: value =>
@@ -29,22 +31,19 @@ function SignUpForm() {
       value.length < 3 ? 'Last name must be at least 3 characters' : null,
   };
 
-  const {
-    isLoading,
-    mutate: signUp,
-    isSuccess,
-  } = useMutation({
+  const { isLoading, mutate: signUp } = useMutation({
     mutationFn: signUpWithEmailAndPassword,
+    onSuccess: user => {
+      // queryClient.setQueriesData(['user'], user);
+      Toast('success', 'Account Created Successfully');
+      navigate('/', { replace: true });
+    },
 
-    onError: error => {
+    onError: () => {
       Toast('error', 'Error Creating account, Please try again');
     },
   });
 
-  if (isSuccess) {
-    Toast('success', 'Account created successfully');
-    navigate('/');
-  }
   // Define the submit callback function
   function submitCallback(formValues) {
     signUp(formValues);

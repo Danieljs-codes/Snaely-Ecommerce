@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedAuth from './components/ProtectedAuth';
 import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './context/CartContext.jsx';
 import UploadPicture from './pages/UploadPicture';

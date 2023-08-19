@@ -3,15 +3,17 @@ import { useEffect } from 'react';
 import { useUser } from '../hooks/useUser';
 
 import Spinner from './Spinner';
+import Toast from './Toast';
 
-function ProtectedRoute({ children }) {
+function ProtectedAuth({ children }) {
   const { isAuthenticated, isLoading } = useUser();
   const navigate = useNavigate();
   console.log(isLoading);
 
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
-      navigate('/login');
+    if (isAuthenticated && !isLoading) {
+      navigate('/');
+      Toast('error', 'You are already logged in');
     }
   }, [isAuthenticated, isLoading, navigate]);
 
@@ -19,9 +21,9 @@ function ProtectedRoute({ children }) {
     return <Spinner />;
   }
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return children;
   }
 }
 
-export default ProtectedRoute;
+export default ProtectedAuth;

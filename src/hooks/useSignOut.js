@@ -11,6 +11,7 @@ export function useSignOut() {
     mutationFn: signOut,
     onSuccess: () => {
       queryClient.removeQueries();
+      queryClient.invalidateQueries('user');
       navigate('/login', { replace: true });
       Toast('success', 'Signed Out Successfully');
     },

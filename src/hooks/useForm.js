@@ -72,10 +72,8 @@ export function useForm(initialState, validationRules, submitCallback) {
     if (validateForm()) {
       submitCallback(values);
       // Hack Around Not clearing the form immediately after submit waiting 3 seconds (Guessing the redirect should have happen by then)
-      setTimeout(() => {
-        setValues(initialState);
-        setErrors({});
-      }, 3000);
+      setValues(initialState);
+      setErrors({});
     }
   }
 

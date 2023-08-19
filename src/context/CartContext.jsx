@@ -1,10 +1,16 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import Toast from '../components/Toast';
 
 const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    localStorage.getItem('cart')
+      ? setCartItems(JSON.parse(localStorage.getItem('cart')))
+      : setCartItems([]);
+  }, []);
 
   function handleAddItem(itemToAdd) {
     const existingItem = cartItems.find(item => item.id === itemToAdd.id);
@@ -18,6 +24,7 @@ function CartProvider({ children }) {
             }
           : item
       );
+
       setCartItems(newCart);
 
       localStorage.setItem('cart', JSON.stringify(newCart));

@@ -45,7 +45,7 @@ function Product() {
       color: color,
     };
 
-    await delay(1000);
+    await delay(2000);
     handleAddItem(itemToAdd);
     setAddingToCart(false);
   }

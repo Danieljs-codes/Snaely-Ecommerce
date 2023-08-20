@@ -90,5 +90,3 @@ function useCart() {
 }
 
 export { CartProvider, useCart };
-
-// Add PropTypes for the children prop usin

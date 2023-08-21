@@ -250,7 +250,7 @@ function Product() {
           />
           <div>
             <div className="mb-4 mt-10 flex items-center lg:mb-10">
-              <div className="flex flex-1 items-center gap-x-4">
+              <div className="flex flex-1 items-center gap-x-1 lg:gap-x-4">
                 <h2 className="font-neue text-[1.75rem] lg:text-[2rem]">
                   Reviews
                 </h2>

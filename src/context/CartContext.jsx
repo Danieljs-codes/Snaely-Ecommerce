@@ -14,12 +14,18 @@ function CartProvider({ children }) {
 
   function handleAddItem(itemToAdd) {
     const existingItem = cartItems.find(item => item.id === itemToAdd.id);
+    if (existingItem && existingItem.quantity >= 25) {
+      Toast('error', 'You can only add 25 of each item to your cart');
+      return;
+    }
 
     if (existingItem) {
       const newCart = cartItems.map(item =>
         item.id === itemToAdd.id
           ? {
               ...item,
+              size: itemToAdd.size,
+              color: itemToAdd.color,
               quantity: item.quantity + itemToAdd.quantity,
             }
           : item
@@ -65,6 +71,7 @@ function CartProvider({ children }) {
   function handleDeleteAllItems() {
     setCartItems([]);
     localStorage.setItem('cart', JSON.stringify([]));
+    Toast('success', 'Cart cleared');
   }
 
   return (

@@ -10,7 +10,7 @@ export function useDeleteUser() {
 
   const { mutate: deleteUser, isLoading } = useMutation({
     mutationFn: deleteAccount,
-    onSuccess: data => {
+    onSuccess: () => {
       queryClient.removeQueries();
 
       navigate('/sign-up', { replace: true });
@@ -20,7 +20,6 @@ export function useDeleteUser() {
       Toast('error', error.message || 'Error signing out');
     },
   });
-
 
   return { deleteUser, isLoading };
 }

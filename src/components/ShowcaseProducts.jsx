@@ -27,6 +27,8 @@ function ShowcaseProducts() {
     );
   }
 
+  if (showcaseLoading) return <Spinner />;
+
   return (
     <div className="py-9 text-center text-[1.75rem] leading-none">
       <h2 className="mb-6 font-neue">

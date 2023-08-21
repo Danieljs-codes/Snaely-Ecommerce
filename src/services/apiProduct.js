@@ -16,14 +16,9 @@ export async function fetchShowcaseProduct() {
   return data;
 }
 export async function fetchProducts(page) {
-  let query = supabase
-    .from('products')
-    .select(`*, categories(category_name)`, { count: 'exact' });
-
-  // if (error)
-  //   throw new Error(
-  //     error.message || 'Error fetching data for showcase try again'
-  //   );
+  let query = supabase.from('products').select(`*, categories(category_name)`, {
+    count: 'exact',
+  });
 
   if (page) {
     const from = (page - 1) * PRODUCTS_PER_PAGE;
@@ -56,6 +51,17 @@ export async function fetchCartItems() {
   const { data, error } = await supabase.from('cart').select(`*, products(*)`);
 
   if (error) throw new Error(error.message || 'Error Getting Cart Items');
+
+  return data;
+}
+
+export async function getProductReviews(productId) {
+  const { data, error } = await supabase
+    .from('products_reviews')
+    .select(`*, customers(*)`)
+    .eq('product_id', productId);
+
+  if (error) throw new Error(error.message || 'Error Getting Reviews');
 
   return data;
 }

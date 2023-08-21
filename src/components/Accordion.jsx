@@ -30,9 +30,9 @@ const Accordion = ({ returnPolicy, materials, description }) => {
           {openSection === 'returnPolicy' && (
             <motion.div
               className="mb-2 text-left text-sm font-medium"
-              initial={{ height: 0 }}
-              animate={{ height: 'auto' }}
-              exit={{ height: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
             >
               {returnPolicy}
             </motion.div>
@@ -57,9 +57,9 @@ const Accordion = ({ returnPolicy, materials, description }) => {
         <AnimatePresence>
           {openSection === 'materials' && (
             <motion.div
-              initial={{ height: 0 }}
-              animate={{ height: 'auto' }}
-              exit={{ height: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
             >
               <span className="text-left text-sm font-medium">
                 {Array.isArray(materials) ? (
@@ -77,20 +77,6 @@ const Accordion = ({ returnPolicy, materials, description }) => {
         </AnimatePresence>
       </div>
 
-      {/* <button className="block" onClick={() => toggleSection('description')}>
-        Description
-      </button>
-      <AnimatePresence>
-        {openSection === 'description' && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-          >
-            {description}
-          </motion.div>
-        )}
-      </AnimatePresence> */}
       <div className="border-b border-t border-grey-100">
         <button
           className="flex w-full py-4 text-left text-sm font-medium"
@@ -109,9 +95,9 @@ const Accordion = ({ returnPolicy, materials, description }) => {
           {openSection === 'description' && (
             <motion.div
               className="mb-2 text-left text-sm font-medium"
-              initial={{ height: 0 }}
-              animate={{ height: 'auto' }}
-              exit={{ height: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
             >
               {description}
             </motion.div>
@@ -123,54 +109,3 @@ const Accordion = ({ returnPolicy, materials, description }) => {
 };
 
 export default Accordion;
-
-/* <div className="border-b border-t border-grey-100">
-        <button
-          className="flex w-full py-4 text-left text-sm font-medium"
-          onClick={() => toggleSection('returnPolicy')}
-        >
-          <span className="flex-1">Return Policy</span>
-          <span>
-            {openSection === 'returnPolicy' ? (
-              <ChevronDownIcon className="inline-block h-5 w-5 text-right text-primary-black-500" />
-            ) : (
-              <ChevronUpIcon className="inline-block h-5 w-5 text-right text-primary-black-500" />
-            )}
-          </span>
-        </button>
-        <AnimatePresence>
-          {openSection === 'returnPolicy' && (
-            <motion.div
-              className="mb-2 text-left text-sm font-medium"
-              initial={{ height: 0 }}
-              animate={{ height: 'auto' }}
-              exit={{ height: 0 }}
-            >
-              {returnPolicy}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div> */
-
-/* <button className="block" onClick={() => toggleSection('materials')}>
-        Materials
-      </button>
-      <AnimatePresence>
-        {openSection === 'materials' && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-          >
-            {Array.isArray(materials) ? (
-              <ul>
-                {materials.map((material, index) => (
-                  <li key={index}>{material}</li>
-                ))}
-              </ul>
-            ) : (
-              materials
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence> */

@@ -3,7 +3,7 @@ import { fetchProducts } from '../services/apiProduct';
 import { useSearchParams } from 'react-router-dom';
 
 export function useProducts() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const page = Number(searchParams.get('page')) || 1;
   const {
@@ -14,8 +14,6 @@ export function useProducts() {
     queryKey: ['products', page],
     queryFn: () => fetchProducts(page),
   });
-
-  console.log(products, count);
 
   if (error) throw new Error('Failed to fetch showcase products');
 

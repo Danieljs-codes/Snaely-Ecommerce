@@ -18,14 +18,13 @@ function Product() {
   const navigate = useNavigate();
   const { handleAddItem, handleDeleteAllItems } = useCart();
   const { isLoading, products } = useProducts();
+  console.log(products);
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
   const [addingToCart, setAddingToCart] = useState(false);
   const { loadingReviews, reviews, count: totalReviews } = useFetchReviews(id);
 
   const product = products?.find(product => product.product_id === id);
-
-  const similarProduct = [...products].splice(0, 4);
 
   useEffect(() => {
     if (!product && !isLoading) {
@@ -35,9 +34,15 @@ function Product() {
     }
   }, [product, isLoading, navigate]);
 
+  useEffect(() => {}, []);
+
   if (isLoading) {
     return <Spinner />;
   }
+
+  const similarProduct = Array.isArray(products)
+    ? [...products].splice(0, 4)
+    : [];
 
   if (!product) return;
 
@@ -286,14 +291,14 @@ function Product() {
                 )}
               </div>
             ) : (
-              <div className="my-5 flex flex-col items-center justify-center">
+              <div className="my-7 flex flex-col items-center justify-center">
                 <img
                   className="pointer-events-none select-none"
                   src="../public/empty-review.svg"
                   alt="No Reviews Yet"
                 />
                 <h2 className="text-center text-lg font-medium">
-                  No Reviews found
+                  No Reviews added yet
                 </h2>
               </div>
             )}

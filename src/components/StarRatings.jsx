@@ -1,4 +1,3 @@
-import { useStarRatings } from '../hooks/useStarRatings';
 import { StarIcon } from '@heroicons/react/24/solid';
 
 function StarRatings({ rating }) {

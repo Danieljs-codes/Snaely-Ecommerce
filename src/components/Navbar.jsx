@@ -11,6 +11,7 @@ import Modal from './Modal';
 import Logo from './Logo';
 import ProfileDropdown from './ProfileDropdown';
 import { useCart } from '../context/CartContext.jsx';
+import ReviewForm from './ReviewForm';
 
 const navigation = [
   { name: 'Products', href: '/products', current: true },
@@ -29,7 +30,7 @@ function classNames(...classes) {
 
 function Navbar() {
   const { logout } = useSignOut();
-  const { setIsModalOpen } = useModal();
+  const { setIsModalOpen, deleteUser } = useModal();
   const { cartItems } = useCart();
 
   const cartItemsLength = cartItems.reduce(
@@ -153,7 +154,7 @@ function Navbar() {
       <Modal
         title="Deactivate account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone."
-        type="delete"
+        onConfirm={deleteUser}
       />
     </>
   );

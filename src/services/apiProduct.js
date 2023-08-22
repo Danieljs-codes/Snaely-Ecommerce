@@ -56,12 +56,12 @@ export async function fetchCartItems() {
 }
 
 export async function getProductReviews(productId) {
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from('products_reviews')
-    .select(`*, customers(*)`)
+    .select(`*, customers(*)`, { count: 'exact' })
     .eq('product_id', productId);
 
   if (error) throw new Error(error.message || 'Error Getting Reviews');
 
-  return data;
+  return { data, count };
 }

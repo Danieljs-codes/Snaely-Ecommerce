@@ -11,6 +11,7 @@ import Accordion from '../components/Accordion';
 import Toast from '../components/Toast';
 import useFetchReviews from '../hooks/useFetchReviews';
 import Reviews from '../components/Reviews';
+import ShowcaseCard from '../components/ShowcaseCard';
 
 function Product() {
   const { id } = useParams();
@@ -20,9 +21,11 @@ function Product() {
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
   const [addingToCart, setAddingToCart] = useState(false);
-  const { loadingReviews, reviews } = useFetchReviews(id);
+  const { loadingReviews, reviews, count: totalReviews } = useFetchReviews(id);
 
   const product = products?.find(product => product.product_id === id);
+
+  const similarProduct = [...products].splice(0, 4);
 
   useEffect(() => {
     if (!product && !isLoading) {
@@ -159,7 +162,7 @@ function Product() {
                       color.inStore
                         ? 'cursor-pointer focus:outline-none'
                         : 'cursor-not-allowed opacity-25'
-                    } ui-active:border-primary-500 border border-grey-200 px-6 py-3 text-xs font-medium text-gray-500 ui-checked:border-primary-black-500 ui-checked:text-primary-black-500 ui-active:text-primary-black-500`}
+                    } ui-active:border-primary-500 border border-grey-200 px-6 py-3 text-[0.625rem] font-medium text-gray-500 ui-checked:border-primary-black-500 ui-checked:text-primary-black-500 ui-active:text-primary-black-500 min-[375px]:text-xs`}
                     disabled={!color.inStore}
                   >
                     <RadioGroup.Label className="capitalize" as="span">
@@ -255,27 +258,60 @@ function Product() {
                   Reviews
                 </h2>
                 <p className="-mt-1 text-xs font-medium underline underline-offset-1 lg:text-sm">
-                  Showing 1849 review
+                  {`Showing ${totalReviews} ${
+                    totalReviews === 1 ? 'review' : 'reviews'
+                  }`}
                 </p>
               </div>
               <button className="rounded-full border border-primary-black-500 bg-black px-4 py-[0.625rem] text-sm text-white lg:bg-transparent lg:text-primary-black-500">
                 Write Review
               </button>
             </div>
-            <div className="space-y-4">
-              {reviews?.map(review => (
-                <Reviews
-                  key={review.review_id}
-                  firstName={review.customers.first_name}
-                  lastName={review.customers.last_name}
-                  date={review.review_date}
-                  ratings={review.rating}
-                  review={review.review_text}
+            {reviews?.length > 0 ? (
+              <div className="space-y-4">
+                {loadingReviews ? (
+                  <Spinner />
+                ) : (
+                  reviews?.map(review => (
+                    <Reviews
+                      key={review.review_id}
+                      firstName={review.customers.first_name}
+                      lastName={review.customers.last_name}
+                      date={review.review_date}
+                      ratings={review.rating}
+                      review={review.review_text}
+                      totalReviews={totalReviews}
+                    />
+                  ))
+                )}
+              </div>
+            ) : (
+              <div className="my-5 flex flex-col items-center justify-center">
+                <img
+                  className="pointer-events-none select-none"
+                  src="../public/empty-review.svg"
+                  alt="No Reviews Yet"
                 />
-              ))}
-            </div>
+                <h2 className="text-center text-lg font-medium">
+                  No Reviews found
+                </h2>
+              </div>
+            )}
           </div>
         </div>
+      </div>
+      {/* Review Product */}
+      <h2 className="mb-4 font-neue text-[1.75rem] lg:mb-6 lg:text-[2rem]">
+        Similar Product
+      </h2>
+      <div className="mb-10 grid grid-cols-1 gap-x-5 gap-y-4 lg:mb-14 lg:grid-cols-4">
+        {similarProduct?.map(product => (
+          <ShowcaseCard
+            key={product.product_id}
+            id={product.product_id}
+            showcase={product}
+          />
+        ))}
       </div>
     </>
   );

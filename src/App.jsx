@@ -51,8 +51,22 @@ function App() {
               <Route path="upload-picture" element={<UploadPicture />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />
-            <Route path="sign-up" element={<SignUp />} />
-            <Route path="login" element={<Login />} />
+            <Route
+              path="sign-up"
+              element={
+                <AuthLayout>
+                  <SignUp />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <AuthLayout>
+                  <Login />
+                </AuthLayout>
+              }
+            />
             <Route element={<AuthLayout />}></Route>
           </Routes>
 

@@ -3,7 +3,7 @@ import { getProductReviews } from '../services/apiProduct';
 
 function useFetchReviews(productId) {
   const {
-    data: reviews,
+    data: { data: reviews, count } = {},
     isLoading: loadingReviews,
     error,
   } = useQuery({
@@ -13,7 +13,6 @@ function useFetchReviews(productId) {
 
   if (error) throw new Error(error.message || 'Error Getting Reviews');
 
-  return { reviews, loadingReviews };
+  return { reviews, count, loadingReviews };
 }
 export default useFetchReviews;
-

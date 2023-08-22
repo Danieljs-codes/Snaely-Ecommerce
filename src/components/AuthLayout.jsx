@@ -1,11 +1,8 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
-function AuthLayout() {
-  const location = useLocation();
-
-  const pathName = location.pathname.split('/')[1];
-
+function AuthLayout({ children }) {
+  const pathName = true;
   return (
     <main className="h-screen px-5">
       <div className="md:grid md:grid-cols-2 md:grid-rows-1 md:gap-x-10 lg:gap-x-20">
@@ -21,7 +18,7 @@ function AuthLayout() {
               ? 'Join to start shopping and stay up-to-date on the latest deals.'
               : 'Log in to your account to shopping the newest fashion style'}
           </p>
-          <Outlet />
+          {children}
         </div>
         <div className="hidden h-full max-w-full object-contain md:block">
           <img className="" src="auth-image.png" alt="Two Beautiful Women" />

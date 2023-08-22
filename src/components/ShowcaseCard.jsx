@@ -39,7 +39,7 @@ function ShowcaseCard({ showcase, id }) {
               >
                 Add to Cart
               </Button>
-              <Button className="mt-0 mt-2 border border-primary-black-500 bg-transparent py-[0.625rem] text-sm text-primary-black-500 transition-colors">
+              <Button className="mt-2 border border-primary-black-500 bg-transparent py-[0.625rem] text-sm text-primary-black-500 transition-colors">
                 Buy Now
               </Button>
             </div>

@@ -15,7 +15,7 @@ function CartItems({ product, isSelected, onSelect }) {
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between border-b border-grey-100 pb-4">
       <div className="flex flex-1 items-center gap-x-3">
         <input
           id="product"
@@ -44,7 +44,7 @@ function CartItems({ product, isSelected, onSelect }) {
       </div>
       <div className="flex items-center">
         <span
-          className="inline-flex h-6 w-6 items-center justify-center border-primary-black-500"
+          className="inline-flex h-6 w-6 items-center justify-center border-primary-black-500 cursor-pointer"
           onClick={() => handleReduce(product)}
         >
           <MinusIcon className="h-4 w-4" />
@@ -57,7 +57,7 @@ function CartItems({ product, isSelected, onSelect }) {
           disabled
         />
         <span
-          className="inline-flex h-6 w-6 items-center justify-center border-primary-black-500"
+          className="inline-flex h-6 w-6 items-center justify-center border-primary-black-500 cursor-pointer"
           onClick={() => handleAdd(product)}
         >
           <PlusIcon className="h-4 w-4" />

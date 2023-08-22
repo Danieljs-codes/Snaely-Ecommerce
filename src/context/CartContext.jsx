@@ -5,6 +5,7 @@ const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState({});
 
   useEffect(() => {
     localStorage.getItem('cart')
@@ -26,7 +27,7 @@ function CartProvider({ children }) {
               ...item,
               size: itemToAdd.size,
               color: itemToAdd.color,
-              quantity: item.quantity + itemToAdd.quantity,
+              quantity: item.quantity + 1,
             }
           : item
       );
@@ -34,13 +35,14 @@ function CartProvider({ children }) {
       setCartItems(newCart);
 
       localStorage.setItem('cart', JSON.stringify(newCart));
+      Toast('success', 'Item quantity increased');
     } else {
       const newCart = [...cartItems, itemToAdd];
       setCartItems(newCart);
+      setSelectedItems(prev => ({ ...prev, [itemToAdd.id]: true }));
       localStorage.setItem('cart', JSON.stringify(newCart));
+      Toast('success', 'Item added to cart');
     }
-
-    Toast('success', 'Item added to cart');
   }
 
   function handleDeleteItem(id) {
@@ -61,10 +63,15 @@ function CartProvider({ children }) {
       );
       setCartItems(newCartItems);
       localStorage.setItem('cart', JSON.stringify(newCartItems));
+      return Toast('error', `Item Decreased`);
     } else {
       const updatedCart = cartItems.filter(item => item.id !== id);
       setCartItems(updatedCart);
       localStorage.setItem('cart', JSON.stringify(updatedCart));
+      Toast('error', `Item removed from cart`);
+      const updatedSelectedItems = { ...selectedItems };
+      delete updatedSelectedItems[id];
+      setSelectedItems(updatedSelectedItems);
     }
   }
 
@@ -81,6 +88,8 @@ function CartProvider({ children }) {
         handleAddItem,
         handleDeleteItem,
         handleDeleteAllItems,
+        selectedItems,
+        setSelectedItems,
       }}
     >
       {children}

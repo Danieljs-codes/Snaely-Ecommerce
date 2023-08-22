@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { formatCurrency, delay } from '../utils/helpers';
@@ -34,14 +34,12 @@ function Product() {
     }
   }, [product, isLoading, navigate]);
 
-  useEffect(() => {}, []);
-
   if (isLoading) {
     return <Spinner />;
   }
 
   const similarProduct = Array.isArray(products)
-    ? [...products].splice(0, 4)
+    ? [...products].filter(product => product.product_id !== id).splice(0, 4)
     : [];
 
   if (!product) return;
@@ -67,6 +65,7 @@ function Product() {
       quantity: 1,
       size: size,
       color: color,
+      category: product.categories.category_name,
     };
 
     if (itemToAdd.size === '' || itemToAdd.color === '') {

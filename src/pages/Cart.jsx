@@ -38,8 +38,6 @@ function Cart() {
     );
   }
 
-  console.log(calculateSelectedTotal());
-
   const toggleSelectAll = () => {
     if (
       Object.keys(selectedItems).length === cartItems.length &&
